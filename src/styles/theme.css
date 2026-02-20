@@ -1,0 +1,94 @@
+/**
+ * Quartum Games — dynamic theme system (dark-mode first).
+ * Each theme sets: --bg, --panel, --text, --muted, --border, --accent, --accent-2, --shadow, --ring
+ * Transition: 200ms when switching.
+ */
+
+:root,
+[data-theme="teal"] {
+  --bg: #0c1220;
+  --bg-elevated: #111827;
+  --panel: #151d2e;
+  --panel-hover: #1a2332;
+  --text: #f1f5f9;
+  --text-soft: #cbd5e1;
+  --muted: #64748b;
+  --border: rgba(148, 163, 184, 0.12);
+  --border-strong: rgba(148, 163, 184, 0.2);
+  --accent: #14b8a6;
+  --accent-2: #0d9488;
+  --accent-muted: rgba(20, 184, 166, 0.2);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --ring: #14b8a6;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+}
+
+[data-theme="indigo"] {
+  --bg: #0c0f1a;
+  --bg-elevated: #111827;
+  --panel: #151922;
+  --panel-hover: #1a1f2e;
+  --text: #f1f5f9;
+  --text-soft: #cbd5e1;
+  --muted: #64748b;
+  --border: rgba(148, 163, 184, 0.12);
+  --border-strong: rgba(148, 163, 184, 0.2);
+  --accent: #6366f1;
+  --accent-2: #4f46e5;
+  --accent-muted: rgba(99, 102, 241, 0.2);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --ring: #6366f1;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+}
+
+[data-theme="emerald"] {
+  --bg: #0a1210;
+  --bg-elevated: #0f1816;
+  --panel: #131c1a;
+  --panel-hover: #182220;
+  --text: #f0fdf4;
+  --text-soft: #bbf7d0;
+  --muted: #6b7280;
+  --border: rgba(134, 239, 172, 0.1);
+  --border-strong: rgba(134, 239, 172, 0.18);
+  --accent: #34d399;
+  --accent-2: #10b981;
+  --accent-muted: rgba(52, 211, 153, 0.2);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --ring: #34d399;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+}
+
+[data-theme="amber"] {
+  --bg: #14100c;
+  --bg-elevated: #1a1510;
+  --panel: #1f1914;
+  --panel-hover: #261f18;
+  --text: #fef3c7;
+  --text-soft: #fde68a;
+  --muted: #78716c;
+  --border: rgba(251, 191, 36, 0.12);
+  --border-strong: rgba(251, 191, 36, 0.2);
+  --accent: #f59e0b;
+  --accent-2: #d97706;
+  --accent-muted: rgba(245, 158, 11, 0.2);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --ring: #f59e0b;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, fill 200ms ease, box-shadow 200ms ease !important;
+}
