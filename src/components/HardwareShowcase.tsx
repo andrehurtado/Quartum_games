@@ -1,23 +1,6 @@
+import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import { useParallax } from '@/hooks/useParallax'
-
-const SHOWCASE_ITEMS = [
-  {
-    id: 'tablet',
-    name: 'Tablet Station',
-    tagline: 'Plug & play',
-  },
-  {
-    id: 'arcade',
-    name: 'Arcade + Projector',
-    tagline: 'Light install',
-  },
-  {
-    id: 'projection',
-    name: 'Full Projection System',
-    tagline: 'Premium',
-  },
-] as const
 
 function ProductPlaceholder({
   variant,
@@ -158,6 +141,13 @@ function ProjectionVisual() {
 
 export function HardwareShowcase() {
   const { ref, offset } = useParallax(0.03)
+  const { t } = useLocale()
+
+  const items = [
+    { id: 'tablet' as const, nameKey: 'productTablet', tagKey: 'productTabletTag' },
+    { id: 'arcade' as const, nameKey: 'productArcade', tagKey: 'productArcadeTag' },
+    { id: 'projection' as const, nameKey: 'productProjection', tagKey: 'productProjectionTag' },
+  ]
 
   return (
     <section
@@ -172,24 +162,24 @@ export function HardwareShowcase() {
             className="font-display text-3xl sm:text-4xl font-bold tracking-tight"
             style={{ color: 'var(--text)' }}
           >
-            Hardware
+            {t('showcaseTitle')}
           </h2>
           <p
             className="mt-4 text-lg"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Three tiers for every space — from plug & play to full projection.
+            {t('showcaseSubtitle')}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
-          {SHOWCASE_ITEMS.map((item, index) => (
+          {items.map((item, index) => (
             <div
               key={item.id}
               className="animate-in hover-lift rounded-2xl"
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <ProductPlaceholder
-                variant={item.id as 'tablet' | 'arcade' | 'projection'}
+                variant={item.id}
                 parallaxY={offset}
                 className="aspect-[4/5] sm:aspect-square"
               />
@@ -197,13 +187,13 @@ export function HardwareShowcase() {
                 className="mt-6 text-center font-display font-semibold text-lg"
                 style={{ color: 'var(--text)' }}
               >
-                {item.name}
+                {t(item.nameKey)}
               </p>
               <p
                 className="mt-1 text-center text-sm"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                {item.tagline}
+                {t(item.tagKey)}
               </p>
             </div>
           ))}

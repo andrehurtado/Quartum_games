@@ -1,24 +1,18 @@
 import { useVisible } from '@/hooks/useVisible'
+import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Quote } from 'lucide-react'
 
-const QUOTES = [
-  {
-    quote: 'We wanted something that set us apart. The projection system turned our lounge into a real attraction — dwell time went up and people actually ask about it.',
-    attribution: 'Recreational Tech Center Owner',
-    location: 'Belgium',
-  },
-  {
-    quote: "The tablet stations were a no-brainer. Kids are calmer in the waiting room, and we didn't need any extra wiring or install. Just plug and go.",
-    attribution: 'Dental Office Manager',
-    location: 'Netherlands',
-  },
+const QUOTE_KEYS = [
+  { quoteKey: 'quote1', attribKey: 'quote1Attrib', locKey: 'quote1Loc' },
+  { quoteKey: 'quote2', attribKey: 'quote2Attrib', locKey: 'quote2Loc' },
 ] as const
 
 export function Testimonials() {
   const { ref, visible } = useVisible()
+  const { t } = useLocale()
 
   return (
     <section
@@ -28,19 +22,19 @@ export function Testimonials() {
     >
       <Container narrow>
         <SectionHeading
-          title="What early customers say"
-          subtitle="Early adopters on engagement, ease of use, and fit for their spaces."
+          title={t('testimonialTitle')}
+          subtitle={t('testimonialSubtitle')}
         />
         <div className="mt-12 grid md:grid-cols-2 gap-8">
-          {QUOTES.map((t) => (
-            <Card key={t.attribution} hover>
+          {QUOTE_KEYS.map((q) => (
+            <Card key={q.quoteKey} hover>
               <Quote className="w-8 h-8 mb-4" style={{ color: 'var(--accent)', opacity: 0.7 }} aria-hidden />
               <p className="leading-relaxed" style={{ color: 'var(--text-soft)' }}>
-                &ldquo;{t.quote}&rdquo;
+                &ldquo;{t(q.quoteKey)}&rdquo;
               </p>
               <footer className="mt-4">
-                <cite className="not-italic font-semibold" style={{ color: 'var(--text)' }}>{t.attribution}</cite>
-                <span className="text-sm ml-1" style={{ color: 'var(--muted)' }}> — {t.location}</span>
+                <cite className="not-italic font-semibold" style={{ color: 'var(--text)' }}>{t(q.attribKey)}</cite>
+                <span className="text-sm ml-1" style={{ color: 'var(--muted)' }}> — {t(q.locKey)}</span>
               </footer>
             </Card>
           ))}

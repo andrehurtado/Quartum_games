@@ -1,10 +1,12 @@
 import { Mail } from 'lucide-react'
 import { CONTACT } from '@/constants'
 import { trackCTA } from '@/analytics'
+import { useLocale } from '@/contexts/LocaleContext'
 import { DemoForm } from './DemoForm'
 import { Container } from '@/components/ui/Container'
 
 export function FinalCTA() {
+  const { t } = useLocale()
   const mailto = `mailto:${CONTACT.salesEmail}`
 
   return (
@@ -19,13 +21,13 @@ export function FinalCTA() {
             className="font-display text-2xl sm:text-3xl font-bold tracking-tight"
             style={{ color: 'var(--text)' }}
           >
-            Get in touch
+            {t('ctaTitle')}
           </h2>
           <p
             className="mt-3 text-base"
             style={{ color: 'var(--text-secondary)' }}
           >
-            For quotes and availability, reach out by email.
+            {t('ctaEmailLine')}
           </p>
           <a
             href={mailto}
@@ -36,7 +38,7 @@ export function FinalCTA() {
             {CONTACT.salesEmail}
           </a>
           <p className="mt-8 text-base" style={{ color: 'var(--text-secondary)' }}>
-            For more information. Download our information brochure.{' '}
+            {t('ctaBrochureLine')}{' '}
             <a
               href="/extras/QUARTUMGROUP_CENTROS.pdf"
               target="_blank"
@@ -44,13 +46,13 @@ export function FinalCTA() {
               className="font-medium underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded"
               style={{ color: 'var(--accent)' }}
             >
-              Information Brochure
+              {t('ctaBrochureLink')}
             </a>
           </p>
         </div>
         <div id="demo-form" className="mt-16 max-w-lg mx-auto">
           <p className="text-center text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-            Or request a walkthrough below.
+            {t('ctaWalkthrough')}
           </p>
           <DemoForm />
         </div>

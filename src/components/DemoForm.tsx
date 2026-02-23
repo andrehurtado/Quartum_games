@@ -1,19 +1,20 @@
 import { useState, FormEvent } from 'react'
-import { CONTACT, DEMO_CTA_LABEL } from '@/constants'
+import { CONTACT } from '@/constants'
 import { trackCTA } from '@/analytics'
+import { useLocale } from '@/contexts/LocaleContext'
 
-const BUSINESS_TYPES = ['Recreational tech center', 'Dental / medical waiting room', 'Other venue']
-const TIER_OPTIONS = ['Tablet Station', 'Arcade + Projector', 'Full Projection', 'Not sure yet']
+const BUSINESS_KEYS = ['formBusiness1', 'formBusiness2', 'formBusiness3'] as const
+const TIER_KEYS = ['formTier1', 'formTier2', 'formTier3', 'formTier4'] as const
 
-function buildMailtoBody(data: Record<string, string>): string {
+function buildMailtoBody(data: Record<string, string>, labels: Record<string, string>): string {
   const lines = [
-    `Name: ${data.name}`,
-    `Business type: ${data.businessType}`,
-    `City/Country: ${data.cityCountry}`,
-    `Email: ${data.email}`,
-    data.phone ? `Phone: ${data.phone}` : null,
-    `Preferred tier: ${data.tier}`,
-    data.message ? `Message: ${data.message}` : null,
+    `${labels.name}: ${data.name}`,
+    `${labels.business}: ${data.businessType}`,
+    `${labels.city}: ${data.cityCountry}`,
+    `${labels.email}: ${data.email}`,
+    data.phone ? `${labels.phone}: ${data.phone}` : null,
+    `${labels.tier}: ${data.tier}`,
+    data.message ? `${labels.message}: ${data.message}` : null,
   ].filter(Boolean)
   return lines.join('\n')
 }
@@ -24,6 +25,7 @@ const inputClass =
   'w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]'
 
 export function DemoForm() {
+  const { t } = useLocale()
   const [submitted, setSubmitted] = useState(false)
   const [name, setName] = useState('')
   const [businessType, setBusinessType] = useState('')
@@ -47,7 +49,21 @@ export function DemoForm() {
 
     trackCTA({ type: 'cta_click', label: 'Demo form submit', section: 'demo_form' })
 
-    const body = encodeURIComponent(buildMailtoBody(data))
+    const labels = {
+      name: t('formName'),
+      business: t('formBusiness'),
+      city: t('formCity'),
+      email: t('formEmail'),
+      phone: t('formPhone'),
+      tier: t('formTier'),
+      message: t('formMessage'),
+    }
+    const bodyData = {
+      ...data,
+      businessType: data.businessType ? t(data.businessType as typeof BUSINESS_KEYS[number]) : '',
+      tier: data.tier ? t(data.tier as typeof TIER_KEYS[number]) : '',
+    }
+    const body = encodeURIComponent(buildMailtoBody(bodyData, labels))
     const subject = encodeURIComponent('Demo request — Quartum Games')
     const mailto = `mailto:${CONTACT.salesEmail}?subject=${subject}&body=${body}`
 
@@ -78,9 +94,9 @@ export function DemoForm() {
           borderColor: 'var(--border)',
         }}
       >
-        <p className="font-semibold" style={{ color: 'var(--text)' }}>Thank you.</p>
+        <p className="font-semibold" style={{ color: 'var(--text)' }}>{t('formThankYou')}</p>
         <p className="mt-2 text-sm" style={{ color: 'var(--text-soft)' }}>
-          We've received your request and will be in touch shortly. If you opened an email draft, you can send it to reach us directly.
+          {t('formThankYouBody')}
         </p>
       </div>
     )
@@ -90,7 +106,7 @@ export function DemoForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label htmlFor="demo-name" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          Name <span style={{ color: 'var(--accent)' }}>*</span>
+          {t('formName')} <span style={{ color: 'var(--accent)' }}>*</span>
         </label>
         <input
           id="demo-name"
@@ -104,12 +120,12 @@ export function DemoForm() {
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
-          placeholder="Your name"
+          placeholder={t('formPlaceholderName')}
         />
       </div>
       <div>
         <label htmlFor="demo-business" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          Business type <span style={{ color: 'var(--accent)' }}>*</span>
+          {t('formBusiness')} <span style={{ color: 'var(--accent)' }}>*</span>
         </label>
         <select
           id="demo-business"
@@ -123,15 +139,15 @@ export function DemoForm() {
             color: 'var(--text)',
           }}
         >
-          <option value="">Select…</option>
-          {BUSINESS_TYPES.map((t) => (
-            <option key={t} value={t}>{t}</option>
+          <option value="">{t('formSelect')}</option>
+          {BUSINESS_KEYS.map((key) => (
+            <option key={key} value={key}>{t(key)}</option>
           ))}
         </select>
       </div>
       <div>
         <label htmlFor="demo-city" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          City / Country <span style={{ color: 'var(--accent)' }}>*</span>
+          {t('formCity')} <span style={{ color: 'var(--accent)' }}>*</span>
         </label>
         <input
           id="demo-city"
@@ -145,12 +161,12 @@ export function DemoForm() {
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
-          placeholder="e.g. Brussels, Belgium"
+          placeholder={t('formPlaceholderCity')}
         />
       </div>
       <div>
         <label htmlFor="demo-email" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          Email <span style={{ color: 'var(--accent)' }}>*</span>
+          {t('formEmail')} <span style={{ color: 'var(--accent)' }}>*</span>
         </label>
         <input
           id="demo-email"
@@ -164,12 +180,12 @@ export function DemoForm() {
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
-          placeholder="you@company.com"
+          placeholder={t('formPlaceholderEmail')}
         />
       </div>
       <div>
         <label htmlFor="demo-phone" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          Phone <span style={{ color: 'var(--muted)' }}>(optional)</span>
+          {t('formPhone')} <span style={{ color: 'var(--muted)' }}>{t('formOptional')}</span>
         </label>
         <input
           id="demo-phone"
@@ -182,12 +198,12 @@ export function DemoForm() {
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
-          placeholder="+32 …"
+          placeholder={t('formPlaceholderPhone')}
         />
       </div>
       <div>
         <label htmlFor="demo-tier" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          Preferred tier
+          {t('formTier')}
         </label>
         <select
           id="demo-tier"
@@ -200,15 +216,15 @@ export function DemoForm() {
             color: 'var(--text)',
           }}
         >
-          <option value="">Select…</option>
-          {TIER_OPTIONS.map((t) => (
-            <option key={t} value={t}>{t}</option>
+          <option value="">{t('formSelect')}</option>
+          {TIER_KEYS.map((key) => (
+            <option key={key} value={key}>{t(key)}</option>
           ))}
         </select>
       </div>
       <div>
         <label htmlFor="demo-message" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          Message <span style={{ color: 'var(--muted)' }}>(optional)</span>
+          {t('formMessage')} <span style={{ color: 'var(--muted)' }}>{t('formOptional')}</span>
         </label>
         <textarea
           id="demo-message"
@@ -221,7 +237,7 @@ export function DemoForm() {
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
-          placeholder="Tell us about your space or timeline…"
+          placeholder={t('formPlaceholderMessage')}
         />
       </div>
       <button
@@ -232,7 +248,7 @@ export function DemoForm() {
           color: 'var(--text-soft)',
         }}
       >
-        {DEMO_CTA_LABEL}
+        {t('formSubmit')}
       </button>
     </form>
   )

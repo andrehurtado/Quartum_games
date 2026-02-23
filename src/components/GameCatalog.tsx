@@ -1,28 +1,30 @@
 import { Gamepad2 } from 'lucide-react'
 import { useVisible } from '@/hooks/useVisible'
+import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 
-const CATEGORIES = [
-  { name: 'Reaction', description: 'Quick reflexes, short sessions' },
-  { name: 'Coordination', description: 'Hand–eye and timing' },
-  { name: 'Puzzles', description: 'Logic and focus' },
-  { name: 'Family-friendly', description: 'All ages, low barrier' },
-  { name: 'Short-session', description: 'Designed for waiting and drop-in play' },
+const CATEGORY_KEYS = [
+  { nameKey: 'catReaction', descKey: 'catReactionDesc' },
+  { nameKey: 'catCoordination', descKey: 'catCoordinationDesc' },
+  { nameKey: 'catPuzzles', descKey: 'catPuzzlesDesc' },
+  { nameKey: 'catFamily', descKey: 'catFamilyDesc' },
+  { nameKey: 'catShort', descKey: 'catShortDesc' },
 ] as const
 
-const SAMPLE_GAMES = [
-  { title: 'Reflex Grid', category: 'Reaction' },
-  { title: 'Balance Quest', category: 'Coordination' },
-  { title: 'Puzzle Blocks', category: 'Puzzles' },
-  { title: 'Family Match', category: 'Family-friendly' },
-  { title: 'Quick Catch', category: 'Short-session' },
-  { title: 'Timing Rush', category: 'Reaction' },
+const GAME_KEYS = [
+  { titleKey: 'gameReflex', categoryKey: 'catReaction' },
+  { titleKey: 'gameBalance', categoryKey: 'catCoordination' },
+  { titleKey: 'gamePuzzle', categoryKey: 'catPuzzles' },
+  { titleKey: 'gameFamily', categoryKey: 'catFamily' },
+  { titleKey: 'gameQuick', categoryKey: 'catShort' },
+  { titleKey: 'gameTiming', categoryKey: 'catReaction' },
 ] as const
 
 export function GameCatalog() {
   const { ref, visible } = useVisible()
+  const { t } = useLocale()
 
   return (
     <section
@@ -33,15 +35,15 @@ export function GameCatalog() {
     >
       <Container>
         <SectionHeading
-          title="Curated game catalog"
-          subtitle="Recreation-focused experiences — no metrics or clinical use. Just engaging, atmospheric games that fit your space."
+          title={t('catalogTitle')}
+          subtitle={t('catalogSubtitle')}
         />
         <div className="mt-8">
-          <p className="text-sm font-medium mb-4" style={{ color: 'var(--text-soft)' }}>Categories</p>
+          <p className="text-sm font-medium mb-4" style={{ color: 'var(--text-soft)' }}>{t('categories')}</p>
           <ul className="flex flex-wrap gap-2" role="list">
-            {CATEGORIES.map((cat) => (
+            {CATEGORY_KEYS.map((cat) => (
               <li
-                key={cat.name}
+                key={cat.nameKey}
                 className="rounded-full px-4 py-2 text-sm border"
                 style={{
                   backgroundColor: 'var(--card-bg)',
@@ -49,16 +51,16 @@ export function GameCatalog() {
                   color: 'var(--text-soft)',
                 }}
               >
-                {cat.name} — {cat.description}
+                {t(cat.nameKey)} — {t(cat.descKey)}
               </li>
             ))}
           </ul>
         </div>
         <div className="mt-10">
-          <p className="text-sm font-medium mb-4" style={{ color: 'var(--text-soft)' }}>Sample titles (preview)</p>
+          <p className="text-sm font-medium mb-4" style={{ color: 'var(--text-soft)' }}>{t('sampleTitles')}</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {SAMPLE_GAMES.map((game) => (
-              <Card key={game.title} hover padding="none">
+            {GAME_KEYS.map((game) => (
+              <Card key={game.titleKey} hover padding="none">
                 <div
                   className="aspect-[3/4] flex items-center justify-center"
                   style={{
@@ -69,15 +71,15 @@ export function GameCatalog() {
                   <Gamepad2 className="w-10 h-10 sm:w-12 sm:h-12" style={{ color: 'var(--muted)' }} aria-hidden />
                 </div>
                 <div className="p-3">
-                  <p className="font-medium text-sm truncate" style={{ color: 'var(--text)' }}>{game.title}</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>{game.category}</p>
+                  <p className="font-medium text-sm truncate" style={{ color: 'var(--text)' }}>{t(game.titleKey)}</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>{t(game.categoryKey)}</p>
                 </div>
               </Card>
             ))}
           </div>
         </div>
         <p className="mt-6 text-sm" style={{ color: 'var(--muted)' }}>
-          The full catalog is included in your subscription and updated regularly. No extra per-game fees.
+          {t('catalogFooter')}
         </p>
       </Container>
     </section>

@@ -1,8 +1,10 @@
-import { CONTACT, BRAND } from '@/constants'
+import { CONTACT } from '@/constants'
 import { trackCTA } from '@/analytics'
+import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 
 export function Footer() {
+  const { t } = useLocale()
   const mailto = `mailto:${CONTACT.salesEmail}`
 
   return (
@@ -17,10 +19,10 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
           <div>
             <p className="font-display font-semibold" style={{ color: 'var(--text)' }}>
-              {BRAND.company}
+              {t('company')}
             </p>
             <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
-              {BRAND.company} is a subsidiary of {BRAND.parent}. {BRAND.regionNote}
+              {t('company')} {t('footerSubsidiary')} {t('parent')}. {t('regionNote')}
             </p>
           </div>
           <div className="text-sm">
@@ -45,7 +47,7 @@ export function Footer() {
           className="mt-10 pt-8 text-sm"
           style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', borderTop: '1px solid var(--border)' }}
         >
-          © {new Date().getFullYear()} {BRAND.company}.
+          {t('footerCopyright')} {new Date().getFullYear()} {t('company')}.
         </div>
       </Container>
     </footer>
