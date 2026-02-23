@@ -5,9 +5,16 @@ import { useLocale } from '@/contexts/LocaleContext'
 import { DemoForm } from './DemoForm'
 import { Container } from '@/components/ui/Container'
 
+const BROCHURE_PDF: Record<string, string> = {
+  en: '/extras/QUARTUMGROUP_CENTRO_english.pdf',
+  es: '/extras/QUARTUMGROUP_CENTROS_spanish.pdf',
+  de: '/extras/QUARTUMGROUP_CENTRO_english.pdf',
+}
+
 export function FinalCTA() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const mailto = `mailto:${CONTACT.salesEmail}`
+  const brochureHref = BROCHURE_PDF[locale] ?? BROCHURE_PDF.en
 
   return (
     <section
@@ -40,9 +47,10 @@ export function FinalCTA() {
           <p className="mt-8 text-base" style={{ color: 'var(--text-secondary)' }}>
             {t('ctaBrochureLine')}{' '}
             <a
-              href="/extras/QUARTUMGROUP_CENTROS.pdf"
+              href={brochureHref}
               target="_blank"
               rel="noopener noreferrer"
+              download
               className="font-medium underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded"
               style={{ color: 'var(--accent)' }}
             >

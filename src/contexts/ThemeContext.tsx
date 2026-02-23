@@ -13,10 +13,10 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 function readStored(): ThemeId {
-  if (typeof window === 'undefined') return 'dark'
+  if (typeof window === 'undefined') return 'light'
   const s = window.localStorage.getItem(STORAGE_KEY)
   if (s === 'dark' || s === 'light') return s
-  return 'dark'
+  return 'light'
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
