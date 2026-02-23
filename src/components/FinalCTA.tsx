@@ -35,6 +35,18 @@ export function FinalCTA() {
             <Mail className="w-4 h-4" aria-hidden />
             {CONTACT.salesEmail}
           </a>
+          <p className="mt-8 text-base" style={{ color: 'var(--text-secondary)' }}>
+            For more information. Download our information brochure.{' '}
+            <a
+              href="/extras/QUARTUMGROUP_CENTROS.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded"
+              style={{ color: 'var(--accent)' }}
+            >
+              Information Brochure
+            </a>
+          </p>
         </div>
         <div id="demo-form" className="mt-16 max-w-lg mx-auto">
           <p className="text-center text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
