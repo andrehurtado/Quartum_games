@@ -37,8 +37,8 @@ export function HowItWorks() {
     <section
       id="how-it-works"
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`section-padding transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-      style={{ backgroundColor: 'var(--bg)' }}
+      className={`section-padding transition-all ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-[0.98]'}`}
+      style={{ backgroundColor: 'var(--bg)', transitionDuration: '400ms', transitionTimingFunction: 'var(--ease-smooth)' }}
     >
       <Container narrow>
         <SectionHeading

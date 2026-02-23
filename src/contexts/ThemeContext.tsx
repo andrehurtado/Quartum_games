@@ -1,28 +1,22 @@
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react'
 
-export type ThemeId = 'teal' | 'indigo' | 'emerald' | 'amber'
+export type ThemeId = 'dark' | 'light'
 
 const STORAGE_KEY = 'quartum-theme'
-const THEMES: { id: ThemeId; label: string }[] = [
-  { id: 'teal', label: 'Teal' },
-  { id: 'indigo', label: 'Indigo' },
-  { id: 'emerald', label: 'Emerald' },
-  { id: 'amber', label: 'Amber' },
-]
 
 type ThemeContextValue = {
   theme: ThemeId
   setTheme: (id: ThemeId) => void
-  themes: typeof THEMES
+  toggleTheme: () => void
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 function readStored(): ThemeId {
-  if (typeof window === 'undefined') return 'teal'
+  if (typeof window === 'undefined') return 'dark'
   const s = window.localStorage.getItem(STORAGE_KEY)
-  if (s && (THEMES.some((t) => t.id === s))) return s as ThemeId
-  return 'teal'
+  if (s === 'dark' || s === 'light') return s
+  return 'dark'
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -35,21 +29,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } catch {}
     document.documentElement.setAttribute('data-theme', id)
     document.documentElement.classList.add('theme-transition')
-    setTimeout(() => document.documentElement.classList.remove('theme-transition'), 220)
+    setTimeout(() => document.documentElement.classList.remove('theme-transition'), 400)
   }, [])
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }, [theme, setTheme])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
   return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        setTheme,
-        themes: THEMES,
-      }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )

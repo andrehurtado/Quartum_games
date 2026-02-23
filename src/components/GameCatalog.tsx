@@ -28,8 +28,8 @@ export function GameCatalog() {
     <section
       id="catalog"
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`section-padding transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-      style={{ backgroundColor: 'var(--bg-elevated)' }}
+      className={`section-padding transition-all ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-[0.98]'}`}
+      style={{ backgroundColor: 'var(--bg-elevated)', transitionDuration: '400ms', transitionTimingFunction: 'var(--ease-smooth)' }}
     >
       <Container>
         <SectionHeading
@@ -44,7 +44,7 @@ export function GameCatalog() {
                 key={cat.name}
                 className="rounded-full px-4 py-2 text-sm border"
                 style={{
-                  backgroundColor: 'var(--panel)',
+                  backgroundColor: 'var(--card-bg)',
                   borderColor: 'var(--border)',
                   color: 'var(--text-soft)',
                 }}
@@ -62,7 +62,7 @@ export function GameCatalog() {
                 <div
                   className="aspect-[3/4] flex items-center justify-center"
                   style={{
-                    background: 'linear-gradient(145deg, var(--panel-hover) 0%, var(--panel) 100%)',
+                    background: 'linear-gradient(145deg, var(--panel-hover) 0%, var(--card-bg) 100%)',
                     borderBottom: '1px solid var(--border)',
                   }}
                 >

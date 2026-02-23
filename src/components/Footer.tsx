@@ -1,19 +1,13 @@
-import { Mail, ChevronRight } from 'lucide-react'
-import { CONTACT, BRAND, DEMO_CTA_LABEL } from '@/constants'
+import { CONTACT, BRAND } from '@/constants'
 import { trackCTA } from '@/analytics'
 import { Container } from '@/components/ui/Container'
 
 export function Footer() {
   const mailto = `mailto:${CONTACT.salesEmail}`
 
-  const scrollToDemo = () => {
-    trackCTA({ type: 'cta_click', label: DEMO_CTA_LABEL, section: 'footer' })
-    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <footer
-      className="section-padding border-t"
+      className="section-padding-tight border-t"
       style={{
         backgroundColor: 'var(--bg-elevated)',
         borderColor: 'var(--border)',
@@ -25,49 +19,33 @@ export function Footer() {
             <p className="font-display font-semibold" style={{ color: 'var(--text)' }}>
               {BRAND.company}
             </p>
-            <p className="mt-1 text-sm" style={{ color: 'var(--text-soft)' }}>
-              {BRAND.company} is a subsidiary of {BRAND.parent}.
-            </p>
-            <p className="mt-2 text-sm" style={{ color: 'var(--muted)' }}>
-              {BRAND.regionNote}
+            <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              {BRAND.company} is a subsidiary of {BRAND.parent}. {BRAND.regionNote}
             </p>
           </div>
-          <div className="flex flex-col gap-3 text-sm">
-            <p className="font-medium" style={{ color: 'var(--text)' }}>Contact</p>
+          <div className="text-sm">
             <a
               href={mailto}
-              onClick={() => trackCTA({ type: 'cta_click', label: 'Email Us', section: 'footer' })}
-              className="inline-flex items-center gap-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-elevated)] rounded w-fit"
-              style={{ color: 'var(--accent)' }}
+              onClick={() => trackCTA({ type: 'cta_click', label: 'Email', section: 'footer' })}
+              className="transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-elevated)] rounded w-fit inline-block"
+              style={{ color: 'var(--text-secondary)' }}
             >
-              <Mail className="w-4 h-4" aria-hidden />
               {CONTACT.salesEmail}
             </a>
             {CONTACT.phone && (
-              <a
-                href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-                className="transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-elevated)] rounded w-fit"
-                style={{ color: 'var(--accent)' }}
-              >
-                {CONTACT.phone}
-              </a>
+              <span className="block mt-1" style={{ color: 'var(--text-secondary)' }}>
+                <a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded">
+                  {CONTACT.phone}
+                </a>
+              </span>
             )}
-            <button
-              type="button"
-              onClick={scrollToDemo}
-              className="inline-flex items-center gap-2 mt-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-elevated)] rounded w-fit"
-              style={{ color: 'var(--text-soft)' }}
-            >
-              {DEMO_CTA_LABEL}
-              <ChevronRight className="w-4 h-4" aria-hidden />
-            </button>
           </div>
         </div>
         <div
           className="mt-10 pt-8 text-sm"
-          style={{ borderColor: 'var(--border)', color: 'var(--muted)', borderTop: '1px solid var(--border)' }}
+          style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', borderTop: '1px solid var(--border)' }}
         >
-          © {new Date().getFullYear()} {BRAND.company}. All rights reserved.
+          © {new Date().getFullYear()} {BRAND.company}.
         </div>
       </Container>
     </footer>

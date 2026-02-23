@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-sans: 'DM Sans', system-ui, sans-serif;
-  --font-display: 'Outfit', var(--font-sans);
-}
-
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -18,11 +13,68 @@
     background-color: var(--bg);
     color: var(--text);
     @apply antialiased;
+    transition: background-color var(--duration-theme) var(--ease-smooth), color var(--duration-theme) var(--ease-smooth);
   }
+}
+
+/* Subtle grain overlay (dark premium: very low opacity) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="light"] body::after {
+  opacity: 0.02;
 }
 
 @layer components {
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
+    @apply px-5 sm:px-8 lg:px-12 py-20 sm:py-28 lg:py-32;
+  }
+  .section-padding-tight {
+    @apply px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-24;
+  }
+  .animate-in {
+    animation: animateIn 0.4s var(--ease-smooth) forwards;
+  }
+  .hover-lift {
+    transition: transform var(--duration-theme) var(--ease-smooth);
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    transition: transform var(--duration-theme) var(--ease-smooth), box-shadow var(--duration-theme) var(--ease-smooth);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+  }
+  :root[data-theme="dark"] .btn-primary {
+    background: linear-gradient(180deg, var(--accent-hover) 0%, var(--accent) 100%);
+    color: #fff;
+    box-shadow: var(--shadow-button);
+  }
+  :root[data-theme="light"] .btn-primary,
+  :root:not([data-theme]) .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow-button);
+  }
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -1,5 +1,6 @@
 import { Header } from '@/components/Header'
 import { Hero } from '@/components/Hero'
+import { HardwareShowcase } from '@/components/HardwareShowcase'
 import { ProblemSolution } from '@/components/ProblemSolution'
 import { HardwareTiers } from '@/components/HardwareTiers'
 import { GameCatalog } from '@/components/GameCatalog'
@@ -16,6 +17,7 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <HardwareShowcase />
         <ProblemSolution />
         <HardwareTiers />
         <GameCatalog />

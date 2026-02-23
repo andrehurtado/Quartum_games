@@ -1,94 +1,96 @@
 /**
- * Quartum Games — dynamic theme system (dark-mode first).
- * Each theme sets: --bg, --panel, --text, --muted, --border, --accent, --accent-2, --shadow, --ring
- * Transition: 200ms when switching.
+ * Quartum Games — dual-theme system: Dark Premium | Soft Pastel
+ * Quartum orange accent shared. Transitions: 350ms cubic-bezier.
  */
 
-:root,
-[data-theme="teal"] {
-  --bg: #0c1220;
-  --bg-elevated: #111827;
-  --panel: #151d2e;
-  --panel-hover: #1a2332;
-  --text: #f1f5f9;
-  --text-soft: #cbd5e1;
-  --muted: #64748b;
-  --border: rgba(148, 163, 184, 0.12);
-  --border-strong: rgba(148, 163, 184, 0.2);
-  --accent: #14b8a6;
-  --accent-2: #0d9488;
-  --accent-muted: rgba(20, 184, 166, 0.2);
+/* Quartum orange (shared accent) */
+:root {
+  --quartum-orange: #D97706;
+  --quartum-orange-light: #EA580C;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-theme: 350ms;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Outfit', var(--font-sans);
+}
+
+/* Dark Premium */
+:root[data-theme="dark"] {
+  --bg: #0F1115;
+  --bg-elevated: #141820;
+  --text: #F5F7FA;
+  --text-secondary: #9CA3AF;
+  --text-soft: #9CA3AF;
+  --muted: #9CA3AF;
+  --accent: var(--quartum-orange);
+  --accent-hover: var(--quartum-orange-light);
+  --accent-muted: rgba(217, 119, 6, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.1);
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.35);
-  --ring: #14b8a6;
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-button: 0 2px 8px rgba(217, 119, 6, 0.2);
+  --blur: 12px;
+  --ring: var(--quartum-orange);
+  --panel-hover: rgba(255, 255, 255, 0.05);
+  --panel: rgba(255, 255, 255, 0.03);
 }
 
-[data-theme="indigo"] {
-  --bg: #0c0f1a;
-  --bg-elevated: #111827;
-  --panel: #151922;
-  --panel-hover: #1a1f2e;
-  --text: #f1f5f9;
-  --text-soft: #cbd5e1;
-  --muted: #64748b;
-  --border: rgba(148, 163, 184, 0.12);
-  --border-strong: rgba(148, 163, 184, 0.2);
-  --accent: #6366f1;
-  --accent-2: #4f46e5;
-  --accent-muted: rgba(99, 102, 241, 0.2);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
-  --ring: #6366f1;
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+/* Soft Pastel */
+:root[data-theme="light"] {
+  --bg: #E7D1D9;
+  --bg-elevated: #EDDCE2;
+  --text: #1C1C1E;
+  --text-secondary: #6B7280;
+  --text-soft: #6B7280;
+  --muted: #6B7280;
+  --accent: var(--quartum-orange);
+  --accent-hover: var(--quartum-orange-light);
+  --accent-muted: rgba(217, 119, 6, 0.15);
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.06);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --blur: 12px;
+  --ring: var(--quartum-orange);
+  --panel-hover: rgba(0, 0, 0, 0.03);
+  --panel: #ffffff;
 }
 
-[data-theme="emerald"] {
-  --bg: #0a1210;
-  --bg-elevated: #0f1816;
-  --panel: #131c1a;
-  --panel-hover: #182220;
-  --text: #f0fdf4;
-  --text-soft: #bbf7d0;
-  --muted: #6b7280;
-  --border: rgba(134, 239, 172, 0.1);
-  --border-strong: rgba(134, 239, 172, 0.18);
-  --accent: #34d399;
-  --accent-2: #10b981;
-  --accent-muted: rgba(52, 211, 153, 0.2);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
-  --ring: #34d399;
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+/* Default to dark if no theme set */
+:root:not([data-theme]) {
+  --bg: #0F1115;
+  --bg-elevated: #141820;
+  --text: #F5F7FA;
+  --text-secondary: #9CA3AF;
+  --text-soft: #9CA3AF;
+  --muted: #9CA3AF;
+  --accent: var(--quartum-orange);
+  --accent-hover: var(--quartum-orange-light);
+  --accent-muted: rgba(217, 119, 6, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.1);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-button: 0 2px 8px rgba(217, 119, 6, 0.2);
+  --blur: 12px;
+  --ring: var(--quartum-orange);
+  --panel-hover: rgba(255, 255, 255, 0.05);
+  --panel: rgba(255, 255, 255, 0.03);
 }
 
-[data-theme="amber"] {
-  --bg: #14100c;
-  --bg-elevated: #1a1510;
-  --panel: #1f1914;
-  --panel-hover: #261f18;
-  --text: #fef3c7;
-  --text-soft: #fde68a;
-  --muted: #78716c;
-  --border: rgba(251, 191, 36, 0.12);
-  --border-strong: rgba(251, 191, 36, 0.2);
-  --accent: #f59e0b;
-  --accent-2: #d97706;
-  --accent-muted: rgba(245, 158, 11, 0.2);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
-  --ring: #f59e0b;
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
-}
-
-/* Smooth theme transition */
-html {
-  transition: background-color 200ms ease, color 200ms ease;
-}
-
+/* Theme transition (350ms, no bounce) */
 html.theme-transition,
 html.theme-transition *,
 html.theme-transition *::before,
 html.theme-transition *::after {
-  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, fill 200ms ease, box-shadow 200ms ease !important;
+  transition-property: background-color, color, border-color, box-shadow, fill !important;
+  transition-duration: var(--duration-theme) !important;
+  transition-timing-function: var(--ease-smooth) !important;
 }

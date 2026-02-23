@@ -53,8 +53,8 @@ export function HardwareTiers() {
     <section
       id="tiers"
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`section-padding transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-      style={{ backgroundColor: 'var(--bg)' }}
+      className={`section-padding transition-all ${visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-[0.98]'}`}
+      style={{ backgroundColor: 'var(--bg)', transitionDuration: '400ms', transitionTimingFunction: 'var(--ease-smooth)' }}
     >
       <Container>
         <SectionHeading
@@ -96,7 +96,7 @@ export function HardwareTiers() {
                 <button
                   type="button"
                   onClick={scrollToDemo}
-                  className="mt-6 flex items-center gap-2 text-sm font-medium rounded-lg border px-4 py-2.5 w-full justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--panel)]"
+                  className="mt-6 flex items-center gap-2 text-sm font-medium rounded-lg border px-4 py-2.5 w-full justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
                   style={{
                     borderColor: 'var(--border-strong)',
                     color: 'var(--text-soft)',

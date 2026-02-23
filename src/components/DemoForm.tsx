@@ -21,7 +21,7 @@ function buildMailtoBody(data: Record<string, string>): string {
 const PLACEHOLDER_ENDPOINT = '/api/demo-request'
 
 const inputClass =
-  'w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--panel)]'
+  'w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]'
 
 export function DemoForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -74,7 +74,7 @@ export function DemoForm() {
       <div
         className="rounded-2xl border p-8 text-center"
         style={{
-          backgroundColor: 'var(--panel)',
+          backgroundColor: 'var(--card-bg)',
           borderColor: 'var(--border)',
         }}
       >
@@ -100,7 +100,7 @@ export function DemoForm() {
           onChange={(e) => setName(e.target.value)}
           className={inputClass}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
@@ -118,7 +118,7 @@ export function DemoForm() {
           onChange={(e) => setBusinessType(e.target.value)}
           className={inputClass}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
@@ -141,7 +141,7 @@ export function DemoForm() {
           onChange={(e) => setCityCountry(e.target.value)}
           className={inputClass}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
@@ -160,7 +160,7 @@ export function DemoForm() {
           onChange={(e) => setEmail(e.target.value)}
           className={inputClass}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
@@ -178,7 +178,7 @@ export function DemoForm() {
           onChange={(e) => setPhone(e.target.value)}
           className={inputClass}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
@@ -195,7 +195,7 @@ export function DemoForm() {
           onChange={(e) => setTier(e.target.value)}
           className={inputClass}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
@@ -217,7 +217,7 @@ export function DemoForm() {
           onChange={(e) => setMessage(e.target.value)}
           className={`${inputClass} resize-y`}
           style={{
-            backgroundColor: 'var(--panel)',
+            backgroundColor: 'var(--card-bg)',
             borderColor: 'var(--border)',
             color: 'var(--text)',
           }}
