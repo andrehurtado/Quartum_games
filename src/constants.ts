@@ -3,8 +3,8 @@
  */
 
 export const CONTACT = {
-  salesEmail: 'sales@quartumgames.com',
-  phone: '+32 2 123 45 67', // optional; set to empty string to hide
+  salesEmail: 'salesquartumgroup@gmail.com',
+  phone: '+34 600 308 485', // optional; set to empty string to hide
 } as const
 
 /** "Starting at" pricing labels — edit for your market. Do not show exact prices unless as "starting at". */

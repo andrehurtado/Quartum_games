@@ -14,9 +14,9 @@ const CATEGORY_KEYS = [
 ] as const
 
 const GAME_KEYS = [
+    { titleKey: 'gamePuzzle', categoryKey: 'catPuzzles' },
   { titleKey: 'gameReflex', categoryKey: 'catReaction' },
   { titleKey: 'gameBalance', categoryKey: 'catCoordination' },
-  { titleKey: 'gamePuzzle', categoryKey: 'catPuzzles' },
   { titleKey: 'gameFamily', categoryKey: 'catFamily' },
   { titleKey: 'gameQuick', categoryKey: 'catShort' },
   { titleKey: 'gameTiming', categoryKey: 'catReaction' },
