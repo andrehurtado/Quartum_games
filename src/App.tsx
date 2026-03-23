@@ -1,31 +1,23 @@
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
-import { HardwareShowcase } from '@/components/HardwareShowcase'
-import { ProblemSolution } from '@/components/ProblemSolution'
-import { HardwareTiers } from '@/components/HardwareTiers'
-import { GameCatalog } from '@/components/GameCatalog'
-import { HowItWorks } from '@/components/HowItWorks'
-import { WhoItsFor } from '@/components/WhoItsFor'
-import { Testimonials } from '@/components/Testimonials'
-import { FAQ } from '@/components/FAQ'
-import { FinalCTA } from '@/components/FinalCTA'
 import { Footer } from '@/components/Footer'
+import { HomePage } from '@/pages/HomePage'
+import { AboutPage } from '@/pages/AboutPage'
+import { LowriderPage } from '@/pages/LowriderPage'
+import { ComingSoonPage } from '@/pages/ComingSoonPage'
 
 function App() {
   return (
     <>
       <Header />
       <main>
-        <Hero />
-        <HardwareShowcase />
-        <ProblemSolution />
-        <HardwareTiers />
-        <GameCatalog />
-        <HowItWorks />
-        <WhoItsFor />
-        <Testimonials />
-        <FAQ />
-        <FinalCTA />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/games/lowrider" element={<LowriderPage />} />
+          <Route path="/games/coming-soon" element={<ComingSoonPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
       <Footer />
     </>

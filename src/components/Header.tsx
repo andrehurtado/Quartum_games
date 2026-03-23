@@ -1,24 +1,55 @@
 import { useState } from 'react'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
+import { ChevronDown, Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import type { LocaleId } from '@/translations'
 
-const NAV_IDS = ['showcase', 'tiers', 'catalog', 'how-it-works', 'faq'] as const
-
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [gamesOpen, setGamesOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
-  const { locale, setLocale, t, localeLabel } = useLocale()
+  const { locale, setLocale, localeLabel } = useLocale()
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id)
-    el?.scrollIntoView({ behavior: 'smooth' })
-    setMenuOpen(false)
-  }
-
-  const navLabels = [t('navHardware'), t('navTiers'), t('navCatalog'), t('navHowItWorks'), t('navFAQ')]
+  const text = {
+    en: {
+      home: 'Home',
+      explore: 'Explore Games',
+      lowrider: 'Lowrider',
+      soon: 'Coming Soon',
+      about: 'About Us',
+      contact: 'Contact',
+      themeDark: 'Switch to light mode',
+      themeLight: 'Switch to dark mode',
+      menu: 'Toggle menu',
+      lang: 'Select language',
+    },
+    es: {
+      home: 'Inicio',
+      explore: 'Explorar juegos',
+      lowrider: 'Lowrider',
+      soon: 'Próximamente',
+      about: 'Sobre nosotros',
+      contact: 'Contacto',
+      themeDark: 'Cambiar a modo claro',
+      themeLight: 'Cambiar a modo oscuro',
+      menu: 'Abrir menú',
+      lang: 'Seleccionar idioma',
+    },
+    de: {
+      home: 'Startseite',
+      explore: 'Spiele entdecken',
+      lowrider: 'Lowrider',
+      soon: 'Demnächst',
+      about: 'Über uns',
+      contact: 'Kontakt',
+      themeDark: 'Zu hellem Modus wechseln',
+      themeLight: 'Zu dunklem Modus wechseln',
+      menu: 'Menü öffnen',
+      lang: 'Sprache wählen',
+    },
+  }[locale]
 
   return (
     <header
@@ -33,35 +64,46 @@ export function Header() {
       <Container>
         <div className="flex h-16 sm:h-[4.5rem] items-center justify-between gap-4">
           <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
+            href="/"
             className="font-display font-semibold text-lg tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded"
             style={{ color: 'var(--text)' }}
           >
-            {t('brandName')}
+            Quartum Games
           </a>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Main">
-            {NAV_IDS.map((id, i) => (
+            <NavLink to="/" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
+              {text.home}
+            </NavLink>
+            <div className="relative">
               <button
-                key={id}
                 type="button"
-                onClick={() => scrollTo(id)}
-                className="text-sm font-medium transition-colors duration-[var(--duration-theme)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded px-1 py-2"
-                style={{ color: 'var(--text-secondary)' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--text)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--text-secondary)'
-                }}
+                onClick={() => setGamesOpen((v) => !v)}
+                className="inline-flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]"
               >
-                {navLabels[i]}
+                {text.explore}
+                <ChevronDown className="w-4 h-4" />
               </button>
-            ))}
+              {gamesOpen && (
+                <div
+                  className="absolute mt-2 min-w-44 rounded-lg border p-2"
+                  style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)' }}
+                >
+                  <NavLink to="/games/lowrider" onClick={() => setGamesOpen(false)} className="block rounded px-3 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--panel-hover)] hover:text-[var(--text)]">
+                    {text.lowrider}
+                  </NavLink>
+                  <NavLink to="/games/coming-soon" onClick={() => setGamesOpen(false)} className="block rounded px-3 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--panel-hover)] hover:text-[var(--text)]">
+                    {text.soon}
+                  </NavLink>
+                </div>
+              )}
+            </div>
+            <NavLink to="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
+              {text.about}
+            </NavLink>
+            <a href="/#demo" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
+              {text.contact}
+            </a>
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-2">
@@ -69,7 +111,7 @@ export function Header() {
               className="flex rounded-lg border overflow-hidden"
               style={{ borderColor: 'var(--border)' }}
               role="group"
-              aria-label={t('ariaLanguage')}
+              aria-label={text.lang}
             >
               {(['en', 'es', 'de'] as LocaleId[]).map((id) => (
                 <button
@@ -89,7 +131,7 @@ export function Header() {
             <button
               type="button"
               onClick={toggleTheme}
-              aria-label={theme === 'dark' ? t('ariaTheme') : t('ariaThemeLight')}
+              aria-label={theme === 'dark' ? text.themeDark : text.themeLight}
               className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-[var(--duration-theme)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
               style={{ color: 'var(--text-secondary)' }}
             >
@@ -102,7 +144,7 @@ export function Header() {
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-[var(--duration-theme)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
               style={{ color: 'var(--text-secondary)' }}
               aria-expanded={menuOpen}
-              aria-label={t('ariaMenu')}
+              aria-label={text.menu}
             >
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -116,17 +158,11 @@ export function Header() {
           style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-elevated)' }}
         >
           <nav className="flex flex-col gap-1" aria-label="Mobile">
-            {NAV_IDS.map((id, i) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => scrollTo(id)}
-                className="text-left py-3 px-2 text-sm font-medium rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                {navLabels[i]}
-              </button>
-            ))}
+            <Link to="/" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.home}</Link>
+            <Link to="/games/lowrider" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.lowrider}</Link>
+            <Link to="/games/coming-soon" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.soon}</Link>
+            <Link to="/about" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.about}</Link>
+            <a href="/#demo" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.contact}</a>
           </nav>
         </div>
       )}
