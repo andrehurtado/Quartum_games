@@ -1,30 +1,131 @@
-import { Gamepad2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { useVisible } from '@/hooks/useVisible'
 import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 
-const CATEGORY_KEYS = [
-  { nameKey: 'catReaction', descKey: 'catReactionDesc' },
-  { nameKey: 'catCoordination', descKey: 'catCoordinationDesc' },
-  { nameKey: 'catPuzzles', descKey: 'catPuzzlesDesc' },
-  { nameKey: 'catFamily', descKey: 'catFamilyDesc' },
-  { nameKey: 'catShort', descKey: 'catShortDesc' },
-] as const
-
-const GAME_KEYS = [
-    { titleKey: 'gamePuzzle', categoryKey: 'catPuzzles' },
-  { titleKey: 'gameReflex', categoryKey: 'catReaction' },
-  { titleKey: 'gameBalance', categoryKey: 'catCoordination' },
-  { titleKey: 'gameFamily', categoryKey: 'catFamily' },
-  { titleKey: 'gameQuick', categoryKey: 'catShort' },
-  { titleKey: 'gameTiming', categoryKey: 'catReaction' },
-] as const
-
 export function GameCatalog() {
   const { ref, visible } = useVisible()
-  const { t } = useLocale()
+  const { locale } = useLocale()
+
+  const copy = {
+    en: {
+      title: 'Curated game catalog',
+      subtitle:
+        'A focused product lineup built for supportive insight through interactive gameplay.',
+      insights: 'Insights',
+      lowriderTitle: 'Lowrider',
+      lowriderStatus: 'Featured',
+      lowriderDesc:
+        'A Stroop-inspired game designed to explore how individuals respond to distraction, conflict, and changing task demands.',
+      lowriderSupport:
+        'Can highlight behavioral tendencies in how a person handles distraction, conflict, and task demands.',
+      lowriderCta: 'View Lowrider',
+      lowriderTags: [
+        'Proactive Control',
+        'Reactive Control',
+        'Conflict Handling',
+        'Attention Under Pressure',
+        'Response Tendencies',
+        'Task Demands',
+        'Speed vs Accuracy',
+        'Support Preferences',
+      ],
+      bananasTitle: 'Go Bananas',
+      bananasStatus: 'Coming Soon',
+      bananasDesc:
+        'A playful upcoming experience designed to explore attention, response style, and adaptive interaction through fast, engaging gameplay.',
+      bananasCta: 'Stay Tuned',
+      bananasTags: [
+        'Attention',
+        'Response Style',
+        'Adaptability',
+        'Engagement Patterns',
+        'Processing Pace',
+        'Focus Shifts',
+        'Guided Interaction',
+        'Cognitive Flexibility',
+      ],
+    },
+    es: {
+      title: 'Catálogo de juegos curado',
+      subtitle:
+        'Una selección enfocada de productos para obtener insight de apoyo a través del juego interactivo.',
+      insights: 'Insights',
+      lowriderTitle: 'Lowrider',
+      lowriderStatus: 'Destacado',
+      lowriderDesc:
+        'Un juego inspirado en Stroop diseñado para explorar cómo las personas responden a la distracción, el conflicto y los cambios en la demanda de tareas.',
+      lowriderSupport:
+        'Puede resaltar tendencias conductuales sobre cómo una persona maneja distracción, conflicto y demandas de tarea.',
+      lowriderCta: 'Ver Lowrider',
+      lowriderTags: [
+        'Control Proactivo',
+        'Control Reactivo',
+        'Manejo de Conflicto',
+        'Atención bajo Presión',
+        'Tendencias de Respuesta',
+        'Demandas de Tarea',
+        'Velocidad vs Precisión',
+        'Preferencias de Apoyo',
+      ],
+      bananasTitle: 'Go Bananas',
+      bananasStatus: 'Próximamente',
+      bananasDesc:
+        'Una próxima experiencia lúdica diseñada para explorar atención, estilo de respuesta e interacción adaptativa mediante un juego ágil y atractivo.',
+      bananasCta: 'Próximamente',
+      bananasTags: [
+        'Atención',
+        'Estilo de Respuesta',
+        'Adaptabilidad',
+        'Patrones de Engagement',
+        'Ritmo de Procesamiento',
+        'Cambios de Foco',
+        'Interacción Guiada',
+        'Flexibilidad Cognitiva',
+      ],
+    },
+    de: {
+      title: 'Kuratierter Spielekatalog',
+      subtitle:
+        'Eine fokussierte Produktauswahl für unterstützende Insights durch interaktives Gameplay.',
+      insights: 'Insights',
+      lowriderTitle: 'Lowrider',
+      lowriderStatus: 'Featured',
+      lowriderDesc:
+        'Ein Stroop-inspiriertes Spiel, das untersucht, wie Menschen auf Ablenkung, Konflikt und wechselnde Aufgabenanforderungen reagieren.',
+      lowriderSupport:
+        'Kann Verhaltenstendenzen aufzeigen, wie eine Person mit Ablenkung, Konflikt und Aufgabenanforderungen umgeht.',
+      lowriderCta: 'Lowrider ansehen',
+      lowriderTags: [
+        'Proaktive Kontrolle',
+        'Reaktive Kontrolle',
+        'Konfliktverarbeitung',
+        'Aufmerksamkeit unter Druck',
+        'Reaktionstendenzen',
+        'Aufgabenanforderungen',
+        'Tempo vs Genauigkeit',
+        'Support-Präferenzen',
+      ],
+      bananasTitle: 'Go Bananas',
+      bananasStatus: 'Demnächst',
+      bananasDesc:
+        'Ein kommendes, spielerisches Erlebnis zur Untersuchung von Aufmerksamkeit, Reaktionsstil und adaptiver Interaktion durch schnelles, fesselndes Gameplay.',
+      bananasCta: 'Demnächst',
+      bananasTags: [
+        'Aufmerksamkeit',
+        'Reaktionsstil',
+        'Anpassungsfähigkeit',
+        'Engagement-Muster',
+        'Verarbeitungstempo',
+        'Fokuswechsel',
+        'Geführte Interaktion',
+        'Kognitive Flexibilität',
+      ],
+    },
+  }[locale]
 
   return (
     <section
@@ -34,53 +135,70 @@ export function GameCatalog() {
       style={{ backgroundColor: 'var(--bg-elevated)', transitionDuration: '400ms', transitionTimingFunction: 'var(--ease-smooth)' }}
     >
       <Container>
-        <SectionHeading
-          title={t('catalogTitle')}
-          subtitle={t('catalogSubtitle')}
-        />
-        <div className="mt-8">
-          <p className="text-sm font-medium mb-4" style={{ color: 'var(--text-soft)' }}>{t('categories')}</p>
-          <ul className="flex flex-wrap gap-2" role="list">
-            {CATEGORY_KEYS.map((cat) => (
-              <li
-                key={cat.nameKey}
-                className="rounded-full px-4 py-2 text-sm border"
-                style={{
-                  backgroundColor: 'var(--card-bg)',
-                  borderColor: 'var(--border)',
-                  color: 'var(--text-soft)',
-                }}
+        <SectionHeading title={copy.title} subtitle={copy.subtitle} />
+        <div className="mt-10 grid lg:grid-cols-3 gap-5">
+          <Card hover padding="none" className="lg:col-span-2 overflow-hidden">
+            <img
+              src="/extras/lowrider.jpeg"
+              alt="Lowrider game visual"
+              className="w-full h-56 sm:h-64 object-cover"
+            />
+            <div className="p-6 sm:p-8">
+              <div className="inline-flex rounded-full px-3 py-1 text-xs font-medium mb-3" style={{ backgroundColor: 'var(--accent-muted)', color: 'var(--accent)' }}>
+                {copy.lowriderStatus}
+              </div>
+              <h3 className="font-display text-2xl font-semibold" style={{ color: 'var(--text)' }}>{copy.lowriderTitle}</h3>
+              <p className="mt-3 text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>{copy.lowriderDesc}</p>
+              <p className="mt-4 text-sm" style={{ color: 'var(--text-secondary)' }}>{copy.lowriderSupport}</p>
+              <p className="mt-5 text-xs uppercase tracking-wider font-medium" style={{ color: 'var(--muted)' }}>
+                {copy.insights}
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2" role="list">
+                {copy.lowriderTags.map((tag) => (
+                  <li key={tag} className="rounded-full px-3 py-1.5 text-xs border" style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', backgroundColor: 'var(--panel-hover)' }}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/games/lowrider"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-medium"
+                style={{ color: 'var(--accent)' }}
               >
-                {t(cat.nameKey)} — {t(cat.descKey)}
-              </li>
-            ))}
-          </ul>
+                {copy.lowriderCta}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </Card>
+
+          <Card hover padding="none" className="overflow-hidden">
+            <img
+              src="/extras/go-bananas-placeholder.svg"
+              alt="Go Bananas placeholder visual"
+              className="w-full h-56 sm:h-64 object-cover"
+            />
+            <div className="p-6">
+              <div className="inline-flex rounded-full px-3 py-1 text-xs font-medium mb-3" style={{ backgroundColor: 'var(--panel-hover)', color: 'var(--text-secondary)' }}>
+                {copy.bananasStatus}
+              </div>
+              <h3 className="font-display text-xl font-semibold" style={{ color: 'var(--text)' }}>{copy.bananasTitle}</h3>
+              <p className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>{copy.bananasDesc}</p>
+              <p className="mt-4 text-xs uppercase tracking-wider font-medium" style={{ color: 'var(--muted)' }}>
+                {copy.insights}
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2" role="list">
+                {copy.bananasTags.map((tag) => (
+                  <li key={tag} className="rounded-full px-3 py-1.5 text-xs border" style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', backgroundColor: 'var(--panel-hover)' }}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-5 inline-block text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                {copy.bananasCta}
+              </span>
+            </div>
+          </Card>
         </div>
-        <div className="mt-10">
-          <p className="text-sm font-medium mb-4" style={{ color: 'var(--text-soft)' }}>{t('sampleTitles')}</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {GAME_KEYS.map((game) => (
-              <Card key={game.titleKey} hover padding="none">
-                <div
-                  className="aspect-[3/4] flex items-center justify-center"
-                  style={{
-                    background: 'linear-gradient(145deg, var(--panel-hover) 0%, var(--card-bg) 100%)',
-                    borderBottom: '1px solid var(--border)',
-                  }}
-                >
-                  <Gamepad2 className="w-10 h-10 sm:w-12 sm:h-12" style={{ color: 'var(--muted)' }} aria-hidden />
-                </div>
-                <div className="p-3">
-                  <p className="font-medium text-sm truncate" style={{ color: 'var(--text)' }}>{t(game.titleKey)}</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--muted)' }}>{t(game.categoryKey)}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-        <p className="mt-6 text-sm" style={{ color: 'var(--muted)' }}>
-          {t('catalogFooter')}
-        </p>
       </Container>
     </section>
   )
