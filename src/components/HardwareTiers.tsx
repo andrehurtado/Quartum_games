@@ -6,6 +6,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { HardwarePlaceholder } from '@/components/HardwarePlaceholder'
+import { ContactAnchorLink } from '@/components/ContactAnchorLink'
 import { ChevronRight } from 'lucide-react'
 
 const TIER_CONFIG = [
@@ -45,9 +46,8 @@ export function HardwareTiers() {
   const { ref, visible } = useVisible()
   const { t } = useLocale()
 
-  const scrollToDemo = () => {
-    trackCTA({ type: 'cta_click', label: 'Schedule a walkthrough', section: 'hardware_tiers' })
-    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })
+  const handleGetQuote = () => {
+    trackCTA({ type: 'cta_click', label: 'Get a quote', section: 'hardware_tiers' })
   }
 
   return (
@@ -94,9 +94,8 @@ export function HardwareTiers() {
                 <p className="mt-4 text-sm font-medium" style={{ color: 'var(--text-soft)' }}>
                   {t(tier.pricingKey)}
                 </p>
-                <button
-                  type="button"
-                  onClick={scrollToDemo}
+                <ContactAnchorLink
+                  onClick={handleGetQuote}
                   className="mt-6 flex items-center gap-2 text-sm font-medium rounded-lg border px-4 py-2.5 w-full justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
                   style={{
                     borderColor: 'var(--border-strong)',
@@ -105,7 +104,7 @@ export function HardwareTiers() {
                 >
                   {t('getAQuote')}
                   <ChevronRight className="w-4 h-4" aria-hidden />
-                </button>
+                </ContactAnchorLink>
               </div>
             </Card>
           ))}

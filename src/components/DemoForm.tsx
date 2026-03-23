@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react'
+import { Loader2 } from 'lucide-react'
 import { trackCTA } from '@/analytics'
 import { useLocale } from '@/contexts/LocaleContext'
 
@@ -29,16 +30,19 @@ export function DemoForm() {
       genericError: 'We could not submit your request right now. Please try again in a moment.',
       sending: 'Sending...',
       messageRequired: 'Message is required.',
+      success: 'Your message has been sent successfully.',
     },
     es: {
       genericError: 'No pudimos enviar tu solicitud ahora mismo. Inténtalo de nuevo en un momento.',
       sending: 'Enviando...',
       messageRequired: 'El mensaje es obligatorio.',
+      success: 'Tu mensaje se ha enviado correctamente.',
     },
     de: {
       genericError: 'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut.',
       sending: 'Wird gesendet...',
       messageRequired: 'Nachricht ist erforderlich.',
+      success: 'Ihre Nachricht wurde erfolgreich gesendet.',
     },
   }[locale]
 
@@ -82,6 +86,14 @@ export function DemoForm() {
         return
       }
       setSubmitted(true)
+      setName('')
+      setBusinessType('')
+      setCityCountry('')
+      setEmail('')
+      setPhone('')
+      setTier('')
+      setMessage('')
+      setWebsite('')
     } catch {
       setSubmitError(localizedStatus.genericError)
     } finally {
@@ -99,8 +111,8 @@ export function DemoForm() {
         }}
       >
         <p className="font-semibold" style={{ color: 'var(--text)' }}>{t('formThankYou')}</p>
-        <p className="mt-2 text-sm" style={{ color: 'var(--text-soft)' }}>
-          {t('formThankYouBody')}
+        <p className="mt-2 text-sm" style={{ color: 'var(--text-soft)' }} role="status" aria-live="polite">
+          {localizedStatus.success}
         </p>
       </div>
     )
@@ -258,7 +270,8 @@ export function DemoForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-lg border py-3.5 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
+        aria-busy={submitting}
+        className="w-full rounded-lg border py-3.5 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] inline-flex items-center justify-center gap-2"
         style={{
           borderColor: 'var(--border-strong)',
           color: 'var(--text-soft)',
@@ -266,10 +279,11 @@ export function DemoForm() {
           cursor: submitting ? 'not-allowed' : 'pointer',
         }}
       >
+        {submitting ? <Loader2 className="w-4 h-4 animate-spin" aria-hidden /> : null}
         {submitting ? localizedStatus.sending : t('formSubmit')}
       </button>
       {submitError ? (
-        <p className="text-sm" role="alert" style={{ color: '#dc2626' }}>
+        <p className="text-sm" role="alert" aria-live="assertive" style={{ color: '#dc2626' }}>
           {submitError}
         </p>
       ) : null}

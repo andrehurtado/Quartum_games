@@ -58,10 +58,7 @@ export function FinalCTA() {
             </a>
           </p>
         </div>
-        <div id="walkthrough-form" className="mt-16 max-w-lg mx-auto">
-          <p className="text-center text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-            {t('ctaWalkthrough')}
-          </p>
+        <div id="contact-form" className="mt-16 max-w-lg mx-auto">
           <DemoForm />
         </div>
       </Container>

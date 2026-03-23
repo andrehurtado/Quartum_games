@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
+import { ContactAnchorLink } from '@/components/ContactAnchorLink'
 import type { LocaleId } from '@/translations'
 
 export function Header() {
@@ -101,9 +102,9 @@ export function Header() {
             <NavLink to="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
               {text.about}
             </NavLink>
-            <a href="/#get-in-touch" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
+            <ContactAnchorLink className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
               {text.contact}
-            </a>
+            </ContactAnchorLink>
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-2">
@@ -162,7 +163,7 @@ export function Header() {
             <Link to="/games/lowrider" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.lowrider}</Link>
             <Link to="/games/coming-soon" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.soon}</Link>
             <Link to="/about" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.about}</Link>
-            <a href="/#get-in-touch" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.contact}</a>
+            <ContactAnchorLink onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.contact}</ContactAnchorLink>
           </nav>
         </div>
       )}

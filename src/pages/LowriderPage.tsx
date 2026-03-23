@@ -15,6 +15,7 @@ import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import { Card } from '@/components/ui/Card'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { ContactAnchorLink } from '@/components/ContactAnchorLink'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ShieldCheck } from 'lucide-react'
 
@@ -537,13 +538,12 @@ export function LowriderPage() {
                 {text.finalExplore}
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <a
-                href="/#get-in-touch"
+              <ContactAnchorLink
                 className="inline-flex items-center rounded-lg border px-5 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--panel-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
                 style={{ borderColor: 'var(--border)' }}
               >
                 {text.finalContact}
-              </a>
+              </ContactAnchorLink>
               <Link to="/about" className="inline-flex items-center rounded-lg border px-5 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--panel-hover)]" style={{ borderColor: 'var(--border)' }}>
                 {text.finalLearn}
               </Link>
