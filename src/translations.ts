@@ -44,6 +44,34 @@ export const translations: Record<LocaleId, Record<string, string>> = {
     solution1: 'Turnkey interactive systems you can install and run with minimal effort.',
     solution2: 'A rotating, curated game catalog so content stays fresh.',
     solution3: 'Ongoing support and maintenance so you focus on your guests, not the tech.',
+    // About — team (About page)
+    aboutTeamHeading: 'The people behind Quartum',
+    aboutTeamSubtitle: 'Built by people who believe games can help us grow.',
+    bioPabloName: 'Pablo Indias Peña',
+    bioPabloAlt: 'Portrait of Pablo Indias Peña',
+    bioPabloP1:
+      'Pablo Indias Peña is one of the people who brings Quartum Group to life. He studied Video Game Design, specializing in Game Design, with training at ESAT and Middlesex University of London. For years, his work has focused on video game development, especially on how games can have a positive impact on people.',
+    bioPabloP2:
+      'In recent years, he has focused his path on games applied to education and child development, exploring how play can become a meaningful tool for learning, growing, and overcoming challenges. That vision is one of the reasons Quartum Group was created: to help people through video games by building projects with purpose, educational value, and real impact.',
+    bioAndreName: 'André Hurtado',
+    bioAndreAlt: 'Portrait of André Hurtado',
+    bioAndreP1:
+      'André Hurtado is one of the people driving Quartum Group forward. He studied Neuroscience at Brigham Young University and Bioinformatics at the University of Valencia. After developing software in scientific environments such as Insilico Medicine and the Barcelona Supercomputing Center, he chose to focus his path on creating experiences that help people grow. His vision brings together science, technology, and play to create real impact in education and personal development.',
+    // Home — How it works (flow) copy
+    homeHowItWorksSubtitle:
+      'From playful interaction to insight you can use — a simple path designed for clarity and care.',
+    homeHowStep1Desc:
+      'Players engage through tasks that invite natural responses — no pressure, just interaction.',
+    homeHowStep2Desc:
+      'We look at tendencies in focus, pace, and how people handle distraction and conflict.',
+    homeHowStep3Desc:
+      'Patterns become clear, practical takeaways — framed as support, not judgment.',
+    homeHowStep4Desc:
+      'Use what you learn to shape environments, guidance, and learning that fit the person.',
+    homeHowIllust1Alt: 'Abstract illustration: playful interaction and controller shapes',
+    homeHowIllust2Alt: 'Abstract illustration: patterns and flowing lines',
+    homeHowIllust3Alt: 'Abstract illustration: lightbulb insight and spark',
+    homeHowIllust4Alt: 'Abstract illustration: supportive hands and growth',
     // Hardware Tiers
     tiersTitle: 'Hardware tiers for every space',
     tiersSubtitle: 'Choose the level that fits your venue — from plug & play tablet stations to full projection systems.',
@@ -217,6 +245,32 @@ export const translations: Record<LocaleId, Record<string, string>> = {
     solution1: 'Sistemas interactivos llave en mano que puedes instalar y usar con mínimo esfuerzo.',
     solution2: 'Un catálogo de juegos curado y rotativo para que el contenido se mantenga fresco.',
     solution3: 'Soporte y mantenimiento continuos para que te centres en tus invitados, no en la tecnología.',
+    aboutTeamHeading: 'Las personas detrás de Quartum',
+    aboutTeamSubtitle: 'Construido por personas que creen que los juegos pueden ayudarnos a crecer.',
+    bioPabloName: 'Pablo Indias Peña',
+    bioPabloAlt: 'Retrato de Pablo Indias Peña',
+    bioPabloP1:
+      'Pablo Indias Peña es una de las personas que da vida a Quartum Group. Se formó en el grado de Videojuegos, especializado en la rama de Game Design, con estudios en ESAT y en Middlesex University of London. Desde hace años, su trabajo ha estado centrado en el desarrollo de videojuegos, pero especialmente en cómo estos pueden tener un impacto positivo en las personas.',
+    bioPabloP2:
+      'En los últimos años, ha enfocado su trayectoria en los videojuegos aplicados a la educación y al desarrollo infantil, explorando de qué manera el juego puede convertirse en una herramienta útil para aprender, crecer y superar dificultades. Esa visión es una de las razones por las que nace Quartum Group: con la idea de ayudar a las personas a través de los videojuegos, creando proyectos con propósito, valor educativo y un impacto real.',
+    bioAndreName: 'André Hurtado',
+    bioAndreAlt: 'Retrato de André Hurtado',
+    bioAndreP1:
+      'André Hurtado es una de las personas que impulsa Quartum Group. Se formó en Neurociencia en Brigham Young University y en Bioinformática en la Universidad de Valencia. Tras desarrollar software en entornos científicos como Insilico Medicine y el Barcelona Supercomputing Center, decidió enfocar su camino en crear experiencias que ayuden a las personas a crecer. Su visión une ciencia, tecnología y juego para generar un impacto real en la educación y el desarrollo personal.',
+    homeHowItWorksSubtitle:
+      'De la interacción lúdica al insight útil — un camino claro, pensado con cuidado.',
+    homeHowStep1Desc:
+      'Las personas juegan con tareas que invitan a respuestas naturales — sin presión, solo interacción.',
+    homeHowStep2Desc:
+      'Observamos tendencias en foco, ritmo y cómo se gestiona la distracción y el conflicto.',
+    homeHowStep3Desc:
+      'Los patrones se convierten en conclusiones prácticas — siempre como apoyo, no como juicio.',
+    homeHowStep4Desc:
+      'Aplica lo aprendido para adaptar entornos, guía y aprendizaje a cada persona.',
+    homeHowIllust1Alt: 'Ilustración abstracta: interacción lúdica y formas de mando',
+    homeHowIllust2Alt: 'Ilustración abstracta: patrones y líneas fluidas',
+    homeHowIllust3Alt: 'Ilustración abstracta: idea e insight',
+    homeHowIllust4Alt: 'Ilustración abstracta: apoyo y crecimiento',
     tiersTitle: 'Niveles de hardware para cada espacio',
     tiersSubtitle: 'Elige el nivel que se adapte a tu local — desde estaciones tablet plug & play hasta sistemas de proyección completa.',
     tierTablet: 'Estación tablet',
@@ -381,6 +435,32 @@ export const translations: Record<LocaleId, Record<string, string>> = {
     solution1: 'Schlüsselfertige interaktive Systeme mit minimalem Aufwand in Betrieb.',
     solution2: 'Ein rotierender, kuratierter Spielekatalog für frischen Content.',
     solution3: 'Laufender Support und Wartung, damit Sie sich auf Ihre Gäste konzentrieren, nicht auf die Technik.',
+    aboutTeamHeading: 'Die Menschen hinter Quartum',
+    aboutTeamSubtitle: 'Von Menschen gebaut, die daran glauben, dass Spiele uns beim Wachsen helfen können.',
+    bioPabloName: 'Pablo Indias Peña',
+    bioPabloAlt: 'Porträt von Pablo Indias Peña',
+    bioPabloP1:
+      'Pablo Indias Peña ist eine der Personen, die Quartum Group zum Leben erwecken. Er studierte Videospiele mit Spezialisierung auf Game Design und absolvierte Studien an der ESAT sowie an der Middlesex University of London. Seit Jahren konzentriert sich seine Arbeit auf die Entwicklung von Videospielen, vor allem darauf, wie diese einen positiven Einfluss auf Menschen haben können.',
+    bioPabloP2:
+      'In den letzten Jahren hat er seinen Weg auf Videospiele mit Bezug zu Bildung und kindlicher Entwicklung ausgerichtet und untersucht, wie Spiel zu einem wertvollen Werkzeug für Lernen, Wachstum und das Überwinden von Schwierigkeiten werden kann. Diese Vision ist einer der Gründe, warum Quartum Group entstanden ist: mit der Idee, Menschen durch Videospiele zu helfen und Projekte mit Sinn, pädagogischem Wert und echtem Einfluss zu schaffen.',
+    bioAndreName: 'André Hurtado',
+    bioAndreAlt: 'Porträt von André Hurtado',
+    bioAndreP1:
+      'André Hurtado ist eine der Personen, die Quartum Group vorantreiben. Er studierte Neurowissenschaften an der Brigham Young University und Bioinformatik an der Universität Valencia. Nach der Entwicklung von Software in wissenschaftlichen Umgebungen wie Insilico Medicine und dem Barcelona Supercomputing Center entschied er sich, seinen Weg auf die Schaffung von Erfahrungen zu konzentrieren, die Menschen beim Wachsen helfen. Seine Vision verbindet Wissenschaft, Technologie und Spiel, um echte Wirkung in Bildung und persönlicher Entwicklung zu erzielen.',
+    homeHowItWorksSubtitle:
+      'Von spielerischer Interaktion zu nutzbarem Insight — ein klarer Weg mit Sorgfalt gestaltet.',
+    homeHowStep1Desc:
+      'Menschen treten in Aufgaben ein, die natürliche Reaktionen einladen — ohne Druck, nur Interaktion.',
+    homeHowStep2Desc:
+      'Wir betrachten Tendenzen bei Fokus, Tempo und dem Umgang mit Ablenkung und Konflikt.',
+    homeHowStep3Desc:
+      'Muster werden zu praktischen Erkenntnissen — immer als Unterstützung, nicht als Wertung.',
+    homeHowStep4Desc:
+      'Nutzen Sie das Gelernte, um Umgebung, Anleitung und Lernen passend zu gestalten.',
+    homeHowIllust1Alt: 'Abstrakte Illustration: spielerische Interaktion',
+    homeHowIllust2Alt: 'Abstrakte Illustration: Muster und fließende Linien',
+    homeHowIllust3Alt: 'Abstrakte Illustration: Idee und Insight',
+    homeHowIllust4Alt: 'Abstrakte Illustration: Unterstützung und Wachstum',
     tiersTitle: 'Hardware-Stufen für jeden Raum',
     tiersSubtitle: 'Wählen Sie die Stufe, die zu Ihrem Standort passt — von Tablet-Stationen Plug & Play bis Vollprojektion.',
     tierTablet: 'Tablet-Station',

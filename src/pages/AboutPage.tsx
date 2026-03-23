@@ -1,5 +1,6 @@
 import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
+import { AboutTeamSection } from '@/components/AboutTeamSection'
 import { ProblemSolution } from '@/components/ProblemSolution'
 import { HardwareTiers } from '@/components/HardwareTiers'
 import { GameCatalog } from '@/components/GameCatalog'
@@ -40,6 +41,7 @@ export function AboutPage() {
           </p>
         </Container>
       </section>
+      <AboutTeamSection />
       <ProblemSolution />
       <HardwareTiers />
       <GameCatalog />

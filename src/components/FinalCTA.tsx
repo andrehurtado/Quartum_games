@@ -18,8 +18,8 @@ export function FinalCTA() {
 
   return (
     <section
-      id="demo"
-      className="section-padding scroll-mt-20"
+      id="get-in-touch"
+      className="section-padding scroll-mt-24"
       style={{ backgroundColor: 'var(--bg)' }}
     >
       <Container narrow>
@@ -58,7 +58,7 @@ export function FinalCTA() {
             </a>
           </p>
         </div>
-        <div id="demo-form" className="mt-16 max-w-lg mx-auto">
+        <div id="walkthrough-form" className="mt-16 max-w-lg mx-auto">
           <p className="text-center text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
             {t('ctaWalkthrough')}
           </p>

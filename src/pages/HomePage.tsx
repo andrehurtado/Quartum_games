@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { useLocale } from '@/contexts/LocaleContext'
 import { Container } from '@/components/ui/Container'
 import { Card } from '@/components/ui/Card'
+import { HomeHowItWorks } from '@/components/HomeHowItWorks'
 import { FinalCTA } from '@/components/FinalCTA'
 
 export function HomePage() {
@@ -124,18 +125,7 @@ export function HomePage() {
         </Container>
       </section>
 
-      <section className="section-padding-tight" style={{ backgroundColor: 'var(--bg)' }}>
-        <Container narrow>
-          <h2 className="font-display text-2xl sm:text-3xl font-semibold text-center" style={{ color: 'var(--text)' }}>{copy.flow}</h2>
-          <div className="mt-8 grid sm:grid-cols-4 gap-3 text-center">
-            {[copy.flow1, copy.flow2, copy.flow3, copy.flow4].map((step) => (
-              <div key={step} className="rounded-xl border px-4 py-4 text-sm font-medium" style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', backgroundColor: 'var(--card-bg)' }}>
-                {step}
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <HomeHowItWorks sectionTitle={copy.flow} stepTitles={[copy.flow1, copy.flow2, copy.flow3, copy.flow4]} />
 
       <section className="section-padding-tight" style={{ backgroundColor: 'var(--bg-elevated)' }}>
         <Container>

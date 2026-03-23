@@ -101,7 +101,7 @@ export function Header() {
             <NavLink to="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
               {text.about}
             </NavLink>
-            <a href="/#demo" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
+            <a href="/#get-in-touch" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)]">
               {text.contact}
             </a>
           </nav>
@@ -162,7 +162,7 @@ export function Header() {
             <Link to="/games/lowrider" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.lowrider}</Link>
             <Link to="/games/coming-soon" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.soon}</Link>
             <Link to="/about" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.about}</Link>
-            <a href="/#demo" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.contact}</a>
+            <a href="/#get-in-touch" onClick={() => setMenuOpen(false)} className="text-left py-3 px-2 text-sm font-medium rounded-lg text-[var(--text-secondary)]">{text.contact}</a>
           </nav>
         </div>
       )}

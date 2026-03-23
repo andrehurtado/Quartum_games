@@ -537,7 +537,11 @@ export function LowriderPage() {
                 {text.finalExplore}
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <a href="/#demo" className="inline-flex items-center rounded-lg border px-5 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--panel-hover)]" style={{ borderColor: 'var(--border)' }}>
+              <a
+                href="/#get-in-touch"
+                className="inline-flex items-center rounded-lg border px-5 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--panel-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
+                style={{ borderColor: 'var(--border)' }}
+              >
                 {text.finalContact}
               </a>
               <Link to="/about" className="inline-flex items-center rounded-lg border px-5 py-2.5 text-sm font-medium text-[var(--text-secondary)] hover:bg-[var(--panel-hover)]" style={{ borderColor: 'var(--border)' }}>
