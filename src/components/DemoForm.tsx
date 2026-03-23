@@ -1,32 +1,20 @@
 import { useState, FormEvent } from 'react'
-import { CONTACT } from '@/constants'
 import { trackCTA } from '@/analytics'
 import { useLocale } from '@/contexts/LocaleContext'
 
 const BUSINESS_KEYS = ['formBusiness1', 'formBusiness2', 'formBusiness3'] as const
 const TIER_KEYS = ['formTier1', 'formTier2', 'formTier3', 'formTier4'] as const
 
-function buildMailtoBody(data: Record<string, string>, labels: Record<string, string>): string {
-  const lines = [
-    `${labels.name}: ${data.name}`,
-    `${labels.business}: ${data.businessType}`,
-    `${labels.city}: ${data.cityCountry}`,
-    `${labels.email}: ${data.email}`,
-    data.phone ? `${labels.phone}: ${data.phone}` : null,
-    `${labels.tier}: ${data.tier}`,
-    data.message ? `${labels.message}: ${data.message}` : null,
-  ].filter(Boolean)
-  return lines.join('\n')
-}
-
-const PLACEHOLDER_ENDPOINT = '/api/demo-request'
+const ENDPOINT = '/api/demo-request'
 
 const inputClass =
   'w-full rounded-lg border px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]'
 
 export function DemoForm() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [name, setName] = useState('')
   const [businessType, setBusinessType] = useState('')
   const [cityCountry, setCityCountry] = useState('')
@@ -34,9 +22,36 @@ export function DemoForm() {
   const [phone, setPhone] = useState('')
   const [tier, setTier] = useState('')
   const [message, setMessage] = useState('')
+  const [website, setWebsite] = useState('')
+
+  const localizedStatus = {
+    en: {
+      genericError: 'We could not submit your request right now. Please try again in a moment.',
+      sending: 'Sending...',
+      messageRequired: 'Message is required.',
+    },
+    es: {
+      genericError: 'No pudimos enviar tu solicitud ahora mismo. Inténtalo de nuevo en un momento.',
+      sending: 'Enviando...',
+      messageRequired: 'El mensaje es obligatorio.',
+    },
+    de: {
+      genericError: 'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es gleich erneut.',
+      sending: 'Wird gesendet...',
+      messageRequired: 'Nachricht ist erforderlich.',
+    },
+  }[locale]
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    if (!message.trim()) {
+      setSubmitError(localizedStatus.messageRequired)
+      return
+    }
+
+    setSubmitting(true)
+    setSubmitError('')
+
     const data = {
       name,
       businessType,
@@ -45,44 +60,33 @@ export function DemoForm() {
       phone,
       tier,
       message,
+      website,
+      sourcePage: window.location.pathname,
     }
 
     trackCTA({ type: 'cta_click', label: 'Demo form submit', section: 'demo_form' })
 
-    const labels = {
-      name: t('formName'),
-      business: t('formBusiness'),
-      city: t('formCity'),
-      email: t('formEmail'),
-      phone: t('formPhone'),
-      tier: t('formTier'),
-      message: t('formMessage'),
-    }
-    const bodyData = {
-      ...data,
-      businessType: data.businessType ? t(data.businessType as typeof BUSINESS_KEYS[number]) : '',
-      tier: data.tier ? t(data.tier as typeof TIER_KEYS[number]) : '',
-    }
-    const body = encodeURIComponent(buildMailtoBody(bodyData, labels))
-    const subject = encodeURIComponent('Demo request — Quartum Games')
-    const mailto = `mailto:${CONTACT.salesEmail}?subject=${subject}&body=${body}`
-
     try {
-      const res = await fetch(PLACEHOLDER_ENDPOINT, {
+      const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      if (res.ok) {
-        setSubmitted(true)
+      const responseData = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        setSubmitError(
+          typeof responseData?.message === 'string' && responseData.message.trim()
+            ? responseData.message
+            : localizedStatus.genericError,
+        )
         return
       }
+      setSubmitted(true)
     } catch {
-      // fall through to mailto
+      setSubmitError(localizedStatus.genericError)
+    } finally {
+      setSubmitting(false)
     }
-
-    window.location.href = mailto
-    setSubmitted(true)
   }
 
   if (submitted) {
@@ -104,6 +108,16 @@ export function DemoForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      <input
+        type="text"
+        name="website"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
       <div>
         <label htmlFor="demo-name" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
           {t('formName')} <span style={{ color: 'var(--accent)' }}>*</span>
@@ -224,11 +238,12 @@ export function DemoForm() {
       </div>
       <div>
         <label htmlFor="demo-message" className="block text-sm font-medium mb-1" style={{ color: 'var(--text-soft)' }}>
-          {t('formMessage')} <span style={{ color: 'var(--muted)' }}>{t('formOptional')}</span>
+          {t('formMessage')} <span style={{ color: 'var(--accent)' }}>*</span>
         </label>
         <textarea
           id="demo-message"
           rows={3}
+          required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className={`${inputClass} resize-y`}
@@ -242,14 +257,22 @@ export function DemoForm() {
       </div>
       <button
         type="submit"
+        disabled={submitting}
         className="w-full rounded-lg border py-3.5 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
         style={{
           borderColor: 'var(--border-strong)',
           color: 'var(--text-soft)',
+          opacity: submitting ? 0.7 : 1,
+          cursor: submitting ? 'not-allowed' : 'pointer',
         }}
       >
-        {t('formSubmit')}
+        {submitting ? localizedStatus.sending : t('formSubmit')}
       </button>
+      {submitError ? (
+        <p className="text-sm" role="alert" style={{ color: '#dc2626' }}>
+          {submitError}
+        </p>
+      ) : null}
     </form>
   )
 }
