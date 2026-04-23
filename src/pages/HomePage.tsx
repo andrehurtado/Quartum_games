@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/Container'
 import { Card } from '@/components/ui/Card'
 import { HomeWhatWeDo } from '@/components/HomeWhatWeDo'
 import { HomeHowItWorks } from '@/components/HomeHowItWorks'
+import { SpanishLandingVideoSection } from '@/components/SpanishLandingVideoSection'
 import { FinalCTA } from '@/components/FinalCTA'
 
 /** Featured Lowrider mark — `public/extras/lowrider_logo.png` (case-sensitive on Linux). */
@@ -123,6 +124,8 @@ export function HomePage() {
           </div>
         </Container>
       </section>
+
+      {locale === 'es' ? <SpanishLandingVideoSection /> : null}
 
       <HomeWhatWeDo
         title={copy.what}
